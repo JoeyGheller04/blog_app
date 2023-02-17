@@ -19,8 +19,8 @@
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-around">
     	@foreach($categories as $category)
-      	<a class="p-2 link-secondary" href="#">{{ $category->title }}</a>
-      	@endforeach
+        <a href="{{ route('category-detail', $category->id) }}" class="stretched-link">{{ $category->title }}</a>
+      @endforeach
     </nav>
   </div>
 </div>

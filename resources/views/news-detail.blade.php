@@ -20,13 +20,32 @@
           </div>
 
           <div>
-            <div>Commenti</div>
+            <hr>
             @for($i=0; $i<count($news->comments); $i++)
-            <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                <h5>{{ $news->comments[$i]->user->name }}</h5>
-                <p>{{ $news->comments[$i]->comment }}</p>
-                <p>{{ $news->comments[$i]->created_at->diffForHumans()}}</p>
-            </div>
+              <div class="row d-flex justify-content-center" style="padding: 10px;">
+                <div class="col-md-8 col-lg-6">
+                  <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                    <div class="card-body p-4">
+                      <div class="card mb-4">
+                        <div class="card-body">
+                          <p>{{ $news->comments[$i]->comment }}</p>
+                          <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-row align-items-center justify-content-between" style="width: 100%">
+                              <div class="d-flex flex-row align-items-center">
+                              <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="25" height="25"/>
+                                <p class="small mb-0 ms-2">{{ $news->comments[$i]->user->name }}</p>
+                              </div>                            
+                              <div >
+                                <p class="small mb-0 ms-2" >{{ $news->comments[$i]->created_at->diffForHumans()}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             @endfor
           </div>
         </main>

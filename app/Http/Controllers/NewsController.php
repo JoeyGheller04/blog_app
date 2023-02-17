@@ -35,4 +35,13 @@ class NewsController extends Controller
             'categories' => $categories
     	]);
     }
+    
+    public function getCategories($id){
+        
+    	$category = Category::find($id);
+
+    	return view('category-detail', [
+            'category' => $category,
+    	]);;
+    }
 }
