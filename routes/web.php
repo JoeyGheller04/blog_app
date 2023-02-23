@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\News;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,7 @@ Route::get('news', [NewsController::class, 'index']);
 Route::get('news/{id}', [NewsController::class, 'getNews'])->name('news-detail');
 
 Route::get('news/category/{id}', [NewsController::class, 'getCategories'])->name('category-detail');
+
+Route::get('login', [LoginController::class, 'getLogin'])->name('login');
+
+Route::get('register', [LoginController::class, 'getRegister'])->name('register');
