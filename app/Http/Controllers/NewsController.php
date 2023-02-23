@@ -37,11 +37,15 @@ class NewsController extends Controller
     }
     
     public function getCategories($id){
-        
+
+        $categories = Category::all();
     	$category = Category::find($id);
+        $news = News::where('category_id', $id);
 
     	return view('category-detail', [
+            'categories' => $categories,
             'category' => $category,
+            'news' => $news,
     	]);;
     }
 }
