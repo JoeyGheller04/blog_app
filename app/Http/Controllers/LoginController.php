@@ -9,21 +9,16 @@ use Illuminate\View\View;
 
 class LoginController extends Controller
 {
+        /////////// GET VIEWS
+        public function getLogin()
+        {
+                return view('auth.login', ['no_categories' => true]);
+        }
 
-
-    public function getLogin()
-    {
-
-    	return view('login', [
-            'login' => true
-    	]);
-    }
-
-    public function getRegister()
-    {
-
-    	return view('register', [
-            'register' => true
-    	]);
-    }
+        public function getRegister()
+        {
+                return view('auth.register', ['no_categories' => true]);
+        }
+        /////////// AUTHENTICATION
+        
 }

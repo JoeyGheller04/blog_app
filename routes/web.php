@@ -20,12 +20,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('news', [NewsController::class, 'index']);
+Route::get('news', [NewsController::class, 'index'])->name('news');
 
 Route::get('news/{id}', [NewsController::class, 'getNews'])->name('news-detail');
 
 Route::get('news/category/{id}', [NewsController::class, 'getCategories'])->name('category-detail');
 
-Route::get('login', [LoginController::class, 'getLogin'])->name('login');
+/////////////////////////////// LOGIN ///////////////////////////////
 
-Route::get('register', [LoginController::class, 'getRegister'])->name('register');
+Route::get('login', [LoginController::class, 'getLogin'])->name('auth.login');
+
+Route::get('register', [LoginController::class, 'getRegister'])->name('auth.register');
