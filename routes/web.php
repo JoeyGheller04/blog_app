@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\News;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +18,41 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+
+/******************************************************************************/
+/**************** NEWS ********************************************************/
+/******************************************************************************/
 
 Route::get('news', [NewsController::class, 'index'])->name('news');
 
-Route::get('news/{id}', [NewsController::class, 'getNews'])->name('news-detail');
+Route::get('news/{id}', [NewsController::class, 'getNews'])->name('news-detail')/*->middleware(['auth-blog'])*/;
 
-Route::get('news/category/{id}', [NewsController::class, 'getCategories'])->name('category-detail');
+Route::get('news/category/{category}', [NewsController::class, 'getNewsByCategory'])->name('news-category');
 
-/////////////////////////////// LOGIN ///////////////////////////////
+/******************************************************************************/
+/**************** COMMENTS ****************************************************/
+/******************************************************************************/
 
-Route::get('login', [LoginController::class, 'getLogin'])->name('auth.login');
+Route::post('news/{id}/comment', [NewsController::class, 'doComment'])->name('auth.do-comment');
 
-Route::get('register', [LoginController::class, 'getRegister'])->name('auth.register');
+/******************************************************************************/
+/**************** AUTH ********************************************************/
+/******************************************************************************/
+
+Route::get('login', [AuthController::class, 'login'])->name('auth.login');
+
+Route::post('login', [AuthController::class, 'doLogin'])->name('auth.do-login');
+
+Route::get('register', [AuthController::class, 'register'])->name('auth.register');
+
+Route::post('register', [AuthController::class, 'doRegister'])->name('auth.do-register');
+
+Route::get('logout', [AuthController::class, 'doLogout'])->name('auth.logout');
+
+Route::get('register-success', [AuthController::class, 'registrationSuccess'])->name('auth.register-success');
+
+Route::get('register-error', [AuthController::class, 'registrationError'])->name('auth.register-error');
+
+Route::get('confirm-registration/{id}/{token}', [AuthController::class, 'registrationConfirm'])->name('auth.register-confirm');
+

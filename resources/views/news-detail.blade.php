@@ -18,39 +18,26 @@
                 <p class="card-text mb-auto">{{ $news->text }} </p>
             </div>
           </div>
-
-          <div>
-            <hr>
-            @for($i=0; $i<count($news->comments); $i++)
-              <div class="row d-flex justify-content-center" style="padding: 10px;">
-                <div class="col-md-8 col-lg-6">
-                  <div class="card shadow-0 border" style="background-color: #f0f2f5;">
-                    <div class="card-body p-4">
-                      <div class="card mb-4">
-                        <div class="card-body">
-                          <p>{{ $news->comments[$i]->comment }}</p>
-                          <div class="d-flex justify-content-between">
-                            <div class="d-flex flex-row align-items-center justify-content-between" style="width: 100%">
-                              <div class="d-flex flex-row align-items-center">
-                              <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="25" height="25"/>
-                                <p class="small mb-0 ms-2">{{ $news->comments[$i]->user->name }}</p>
-                              </div>                            
-                              <div >
-                                <p class="small mb-0 ms-2" >{{ $news->comments[$i]->created_at->diffForHumans()}}</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+          <div class="row">
+            <p class="h3" style="text-align: center; margin-top:20px;">Comments</p>
+            @foreach($news->comments as $comment)
+            <div class="col-md-12">
+              <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                  <strong class="d-inline-block mb-2 text-primary">{{ $comment->user->name }}</strong>
+                  <div class="mb-1 text-muted">{{ $comment->created_at->diffForHumans() }}</div>
+                  <p>{{ $comment->comment }}</p>
                 </div>
               </div>
-            @endfor
+            </div>
+            @endforeach
+            @if(Session::get('logged'))
+              @include('partials.comment')
+            @endif
           </div>
         </main>
 
         @include('partials.footer')
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-      </body>
+    </body>
 </html>

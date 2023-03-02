@@ -21,7 +21,7 @@
                   <h3 class="mb-0">{{ Str::limit($n->title, 50, ' (...)') }}</h3>
                   <div class="mb-1 text-muted">{{ $n->created_at->diffForHumans() }}</div>
                   <a href="{{ route('news-detail', $n->id) }}" class="stretched-link">Continue reading</a>
-                  <p>{{count($n->comments)}} comments</p>
+                  <p>{{ count($n->comments) }} comments</p>
                 </div>
                 <div class="col-auto d-none d-lg-block">
                   <img class="bd-placeholder-img" width="200" height="250" src="{{ $n->image_url }}"><title>Placeholder</title>
