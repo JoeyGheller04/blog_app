@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-7WU6yNvVig83CLzX2u04G/DRxnZaUc7I/k1n9fMQsf0C5DyvFUwyrz0fzzHX0ONZc5bZk5B5cpKNYQh+8RtPTg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    </head>
     @include('partials.head')
     <body>
         @include('partials.menu')
@@ -28,6 +32,15 @@
                   <div class="mb-1 text-muted">{{ $comment->created_at->diffForHumans() }}</div>
                   <p>{{ $comment->comment }}</p>
                 </div>
+                <!-- like -->
+                @if(Session::get('logged'))
+                  <form action="{{ route('like') }}" method="POST">
+                    <label for="like-button"><i class="fas fa-thumbs-up"></i></label>
+                    <input type="button" id="like" value="like-button">
+                    <input type="hidden" id="news_id" name="news_id" value="{{ $news->id }}"/>
+                    <input type="hidden" id="comment_id" name="comment_id" value="{{ $comment->id }}"/>
+                  </form>
+                @endif
               </div>
             </div>
             @endforeach

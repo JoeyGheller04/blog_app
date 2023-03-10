@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\View\View;
+use App\Models\Comment;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
 
 class NewsController extends Controller
 {
@@ -48,6 +51,32 @@ class NewsController extends Controller
 
     public function doComment(Request $request)
     {
+        $validated = $request->validate([ 
+            'news_id' => 'required|max:50',
+            'comment' => 'required|max:50',
+        ]);
 
+        $user = Session::get('user');
+        $validated['user_id'] = $user['user_id'];
+
+        $input = $request->only(['user_id', 'news_id', 'comment']);
+        
+        Comment::create($input);
+    }
+
+    public function doLike(Request $request)
+    {
+        $validated = $request->validate([ 
+            'news_id' => 'required|max:50',
+            'comment_id' => 'required|max:50',
+            'like' => 'required',
+        ]);
+
+        $user = Session::get('user');
+        $validated['user_id'] = $user['user_id'];
+
+        $input = $request->only(['user_id', 'news_id', 'comment_id', 'like']);
+        
+        Like::create($input);
     }
 }

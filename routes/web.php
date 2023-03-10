@@ -34,7 +34,9 @@ Route::get('news/category/{category}', [NewsController::class, 'getNewsByCategor
 /**************** COMMENTS ****************************************************/
 /******************************************************************************/
 
-Route::post('news/{id}/comment', [NewsController::class, 'doComment'])->name('auth.do-comment');
+Route::post('comment', [NewsController::class, 'doComment'])->name('partials.comment');
+
+Route::post('like', [NewsController::class, 'doLike'])->name('like');
 
 /******************************************************************************/
 /**************** AUTH ********************************************************/
@@ -55,4 +57,3 @@ Route::get('register-success', [AuthController::class, 'registrationSuccess'])->
 Route::get('register-error', [AuthController::class, 'registrationError'])->name('auth.register-error');
 
 Route::get('confirm-registration/{id}/{token}', [AuthController::class, 'registrationConfirm'])->name('auth.register-confirm');
-
